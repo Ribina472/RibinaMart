@@ -1,0 +1,6 @@
+# RibinaMart Configuration Template
+# Copy this file to config.properties or set environment variables DB_URL, DB_USER, DB_PASSWORD
+app.name=RibinaMart
+db.url=jdbc:h2:./data/ribinamart;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+db.user=sa
+db.password=

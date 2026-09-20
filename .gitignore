@@ -1,0 +1,22 @@
+target/
+*.war
+*.jar
+*.class
+
+# Database and logs
+data/
+*.mv.db
+*.trace.db
+catalina_base/
+logs/
+
+# Sensitive configuration
+.env
+config.properties
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
