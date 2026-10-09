@@ -39,6 +39,8 @@ public class DBContextListener implements ServletContextListener {
     public static final String ATTR_CART_SERVICE = "cartService";
     public static final String ATTR_ORDER_SERVICE = "orderService";
     public static final String ATTR_REVIEW_SERVICE = "reviewService";
+    public static final String ATTR_WISHLIST_SERVICE = "wishlistService";
+    public static final String ATTR_CHAT_SERVICE = "chatService";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -73,12 +75,15 @@ public class DBContextListener implements ServletContextListener {
         CartDAO cartDAO = new CartDAOImpl();
         OrderDAO orderDAO = new OrderDAOImpl();
         ReviewDAO reviewDAO = new ReviewDAOImpl();
+        WishlistDAO wishlistDAO = new WishlistDAOImpl();
 
         UserService userService = new UserService(userDAO);
         ReviewService reviewService = new ReviewService(reviewDAO, productDAO);
         ProductService productService = new ProductService(productDAO, reviewDAO);
         CartService cartService = new CartService(cartDAO, productDAO);
         OrderService orderService = new OrderService(orderDAO, cartDAO, productDAO);
+        WishlistService wishlistService = new WishlistService(wishlistDAO, productDAO);
+        com.ribina.ribinamart.chatbot.ChatService chatService = new com.ribina.ribinamart.chatbot.ChatService();
 
         // 5. Register Services in ServletContext
         context.setAttribute(ATTR_USER_SERVICE, userService);
@@ -86,6 +91,8 @@ public class DBContextListener implements ServletContextListener {
         context.setAttribute(ATTR_CART_SERVICE, cartService);
         context.setAttribute(ATTR_ORDER_SERVICE, orderService);
         context.setAttribute(ATTR_REVIEW_SERVICE, reviewService);
+        context.setAttribute(ATTR_WISHLIST_SERVICE, wishlistService);
+        context.setAttribute(ATTR_CHAT_SERVICE, chatService);
 
         LOGGER.info("RibinaMart context initialization completed successfully.");
     }

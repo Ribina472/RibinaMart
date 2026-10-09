@@ -28,10 +28,12 @@ import java.util.List;
 public class SellerProductController extends HttpServlet {
 
     private ProductService productService;
+    private com.ribina.ribinamart.service.OrderService orderService;
 
     @Override
     public void init() {
         productService = (ProductService) getServletContext().getAttribute(DBContextListener.ATTR_PRODUCT_SERVICE);
+        orderService = (com.ribina.ribinamart.service.OrderService) getServletContext().getAttribute(DBContextListener.ATTR_ORDER_SERVICE);
     }
 
     @Override
@@ -47,6 +49,10 @@ public class SellerProductController extends HttpServlet {
             // Dashboard / products list
             List<ProductDTO> products = productService.getProductsBySeller(seller.getId());
             req.setAttribute("products", products);
+            if (orderService != null) {
+                com.ribina.ribinamart.dto.SellerAnalyticsDTO analytics = orderService.getSellerAnalytics(seller.getId());
+                req.setAttribute("analytics", analytics);
+            }
             req.getRequestDispatcher("/WEB-INF/views/seller/dashboard.jsp").forward(req, resp);
         }
     }

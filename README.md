@@ -4,10 +4,11 @@
 [![Java 17](https://img.shields.io/badge/Java-17-blue.svg)](https://www.oracle.com/java/)
 [![Tomcat](https://img.shields.io/badge/Tomcat-9.0.x-orange.svg)](https://tomcat.apache.org/)
 [![Database](https://img.shields.io/badge/Database-H2_Persistent-blueviolet.svg)](https://www.h2database.com/)
-[![License](https://img.shields.io/badge/License-Academic-green.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-48_Passed-success.svg)]()
+[![Release](https://img.shields.io/badge/Release-v2.0.0--final-green.svg)]()
 
 **Anna University R2025 Regulations — Semester 3 Capstone Project**  
-**Milestone**: Full Build + Deploy Review (September 21)  
+**Milestone**: Final Review & Project Defense (October 10, 2026) — Release v2.0.0  
 **Package**: `com.ribina.ribinamart`
 
 ---
@@ -205,7 +206,7 @@ sequenceDiagram
 ```powershell
 mvn clean test
 ```
-*All 20 tests (embedded H2 DAO integration + Mockito service tests) pass with 0 failures.*
+*All 48 tests (embedded H2 DAO integration, Mockito service tests, and Chatbot tests) pass with 0 failures.*
 
 ### 2. Run Application (1-Click Standalone Embedded Tomcat)
 ```powershell
@@ -219,6 +220,7 @@ mvn compile exec:java -Dserver.port=8085
 The application will be accessible at:
 - **Application Web UI**: [http://localhost:8085/ribinamart](http://localhost:8085/ribinamart)
 - **Health Check Endpoint**: [http://localhost:8085/ribinamart/api/v1/health](http://localhost:8085/ribinamart/api/v1/health)
+- **AI Chatbot Endpoint**: [http://localhost:8085/ribinamart/api/chat](http://localhost:8085/ribinamart/api/chat)
 - **Product Catalog**: [http://localhost:8085/ribinamart/products](http://localhost:8085/ribinamart/products)
 
 ### 3. Deploy to External Tomcat 9.0.x
@@ -230,12 +232,12 @@ Deploy `target/ribinamart.war` to Tomcat's `webapps/` directory.
 
 ---
 
-## 🛡️ Security Checklist Compliance (Week 7 Spec)
+## 🛡️ Security Checklist Compliance
 
-- [x] **100% Parameterized Queries**: Every database access in `UserDAOImpl`, `ProductDAOImpl`, `CartDAOImpl`, `OrderDAOImpl`, and `ReviewDAOImpl` uses `PreparedStatement` with bind variables.
+- [x] **100% Parameterized Queries**: Every database access in `UserDAOImpl`, `ProductDAOImpl`, `CartDAOImpl`, `OrderDAOImpl`, `ReviewDAOImpl`, and `WishlistDAOImpl` uses `PreparedStatement` with bind variables.
 - [x] **BCrypt Password Hashing**: Plaintext passwords are never stored and never logged; hashed with `jBCrypt` (12 rounds of salt).
 - [x] **Session Fixation Prevention**: Session ID is invalidated and regenerated upon successful login in `AuthController`.
-- [x] **Role-Based Access Control**: `AuthFilter` intercepts and enforces authorization on `/seller/*`, `/admin/*`, and buyer checkout routes.
+- [x] **Role-Based Access Control**: `AuthFilter` intercepts and enforces authorization on `/seller/*`, `/admin/*`, `/cart/*`, `/checkout/*`, and `/wishlist/*`.
 - [x] **Output Escaping (XSS Prevention)**: User input is rendered using JSTL `<c:out value="..."/>` and escaped before display.
 - [x] **Custom Error Pages**: `web.xml` maps 403, 404, and 500 status codes to user-friendly JSP pages without stack trace leakage.
 - [x] **Config File Exclusion**: Sensitive files and `.env` are excluded via `.gitignore`.
@@ -243,7 +245,7 @@ Deploy `target/ribinamart.war` to Tomcat's `webapps/` directory.
 
 ---
 
-## 📋 Feature Implementation Matrix (F1 – F8)
+## 📋 Feature Implementation Matrix
 
 - **F1: Authentication & RBAC**: Buyer and Seller registration; seeded Admin; BCrypt hashing; session timeout (30 min).
 - **F2: Seller Inventory Management**: Create, edit, and soft-delete listings; live stock level monitoring.
@@ -253,3 +255,19 @@ Deploy `target/ribinamart.war` to Tomcat's `webapps/` directory.
 - **F6: Order History & Fulfillment**: Buyer order tracking; seller incoming orders view with order fulfillment status update (`PENDING` -> `CONFIRMED` -> `SHIPPED` -> `DELIVERED`).
 - **F7: Admin Governance**: Full user audit table; order audit; listing moderation (flag/unflag products).
 - **F8: Verified Reviews & Ratings**: 1–5 star rating and comment submission restricted to verified purchasers of the product.
+- **O1: Save-for-Later Wishlist**: Persistent buyer wishlist with one-click Add to Wishlist and Move to Cart.
+- **O3: Seller Sales Analytics**: KPI dashboard tracking revenue, orders, units sold, active items, and low-stock alerts.
+- **O4: AI Chatbot Assistant**: Embedded floating widget powered by Google Gemini API with offline domain mock fallback, rate limiting, and caching.
+
+---
+
+## 📚 Capstone Deliverables & Documentation Index
+
+- 📄 **[Final Academic Project Report](FINAL_REPORT.md)**: Full formal report with D1 ER, D2 Use Case, D3 Sequence diagrams, and design patterns.
+- 📽️ **[Viva Defense Slide Deck](SLIDE_DECK.md)**: 12-slide presentation deck with speaker notes.
+- 🎬 **[Live Demo Script](DEMO_SCRIPT.md)**: Rehearsed step-by-step presentation script for demo day.
+- 🧪 **[End-to-End Test Case Sheet](TEST_CASES.md)**: 22 detailed manual & automated test specifications.
+- 🤝 **[Contributing Guidelines](CONTRIBUTING.md)**: Architecture, coding rules, and Git branching workflow.
+- 🔁 **[Sprint Retrospective](RETRO.md)**: Retrospective report covering achievements, challenges, and metrics.
+- ⚙️ **[Environment Template](.env.example)**: Production and development configuration template.
+

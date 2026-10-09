@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- RibinaMart AI Chatbot Widget CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat-widget.css">
     <style>
         :root {
             --rm-primary: #0d6efd;
@@ -83,6 +85,11 @@
 
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
                 <li class="nav-item me-2">
+                    <a class="btn btn-outline-danger position-relative text-white border-secondary" href="${pageContext.request.contextPath}/wishlist" title="My Wishlist">
+                        <i class="bi bi-heart"></i> Wishlist
+                    </a>
+                </li>
+                <li class="nav-item me-2">
                     <a class="btn btn-outline-primary position-relative text-white border-secondary" href="${pageContext.request.contextPath}/cart">
                         <i class="bi bi-cart3"></i> Cart
                     </a>
@@ -101,6 +108,7 @@
                                 <li><span class="dropdown-item-text small text-muted"><c:out value="${sessionScope.currentUser.email}"/></span></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders"><i class="bi bi-receipt me-2"></i>My Orders</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/wishlist"><i class="bi bi-heart me-2 text-danger"></i>My Wishlist</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/auth/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                             </ul>

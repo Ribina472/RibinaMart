@@ -25,6 +25,13 @@
 | **TC13** | Edge Cases | Empty cart checkout attempt blocked with 400 error | **PASS** |
 | **TC14** | Edge Cases | Out-of-stock purchase attempt rejected | **PASS** |
 | **TC15** | System Health | GET `/api/v1/health` returns `{"status":"UP","db":"UP"}` | **PASS** |
+| **TC16** | AI Chatbot (O4) | Chatbot assistant answers domain Q&A with offline mock & chips | **PASS** |
+| **TC17** | AI Chatbot (O4) | Rate limiting protects against spam (>10 requests/min throttled) | **PASS** |
+| **TC18** | AI Chatbot (O4) | Query caching and XSS HTML input sanitization | **PASS** |
+| **TC19** | Wishlist (O1) | Buyer saves active products to wishlist across sessions | **PASS** |
+| **TC20** | Wishlist (O1) | Moving item from wishlist into shopping cart and removal | **PASS** |
+| **TC21** | Analytics (O3) | Seller sales analytics dashboard calculates revenue & low-stock alerts | **PASS** |
+| **TC22** | Automated Suite | 48 automated unit & integration tests run via Maven Surefire | **PASS (48/48)** |
 
 ---
 

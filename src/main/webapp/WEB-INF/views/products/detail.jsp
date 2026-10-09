@@ -97,12 +97,25 @@
                                             <i class="bi bi-cart-plus-fill me-1"></i> Add to Cart
                                         </button>
                                     </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-outline-danger" onclick="document.getElementById('wishlistForm').submit();" title="Save for Later">
+                                            <i class="bi bi-heart me-1"></i> Wishlist
+                                        </button>
+                                    </div>
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                <button class="btn btn-secondary px-4" disabled>Out of Stock</button>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-secondary px-4" disabled>Out of Stock</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="document.getElementById('wishlistForm').submit();" title="Save for Later">
+                                        <i class="bi bi-heart me-1"></i> Wishlist
+                                    </button>
+                                </div>
                             </c:otherwise>
                         </c:choose>
+                        <form id="wishlistForm" action="${pageContext.request.contextPath}/wishlist/add" method="post" class="d-none">
+                            <input type="hidden" name="productId" value="<c:out value='${product.id}'/>">
+                        </form>
                     </div>
                 </div>
             </div>

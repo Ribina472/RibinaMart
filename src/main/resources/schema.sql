@@ -89,3 +89,16 @@ CREATE TABLE IF NOT EXISTS reviews (
 );
 CREATE INDEX IF NOT EXISTS idx_reviews_product ON reviews(product_id);
 CREATE INDEX IF NOT EXISTS idx_reviews_buyer ON reviews(buyer_id);
+
+-- Wishlist table: Buyer saved-for-later items (O1)
+CREATE TABLE IF NOT EXISTS wishlist_items (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_wishlist_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_wishlist_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    CONSTRAINT uq_wishlist_user_product UNIQUE (user_id, product_id)
+);
+CREATE INDEX IF NOT EXISTS idx_wishlist_user ON wishlist_items(user_id);
+CREATE INDEX IF NOT EXISTS idx_wishlist_product ON wishlist_items(product_id);

@@ -34,6 +34,75 @@
         </div>
     </c:if>
 
+    <!-- Seller Sales Analytics KPI Cards (O3) -->
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm bg-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-circle bg-success-subtle text-success p-3 me-3">
+                        <i class="bi bi-currency-rupee fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small fw-semibold text-uppercase">Total Revenue</div>
+                        <div class="fs-4 fw-bold text-dark">₹<c:out value="${analytics.totalRevenue != null ? analytics.totalRevenue : '0.00'}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-0 shadow-sm bg-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-circle bg-primary-subtle text-primary p-3 me-3">
+                        <i class="bi bi-receipt fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small fw-semibold text-uppercase">Orders Received</div>
+                        <div class="fs-4 fw-bold text-dark"><c:out value="${analytics.totalOrdersCount != null ? analytics.totalOrdersCount : 0}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+            <div class="card border-0 shadow-sm bg-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-circle bg-info-subtle text-info p-3 me-3">
+                        <i class="bi bi-box-seam fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small fw-semibold text-uppercase">Units Sold</div>
+                        <div class="fs-4 fw-bold text-dark"><c:out value="${analytics.totalUnitsSold != null ? analytics.totalUnitsSold : 0}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+            <div class="card border-0 shadow-sm bg-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-circle bg-secondary-subtle text-secondary p-3 me-3">
+                        <i class="bi bi-tags fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small fw-semibold text-uppercase">Active Items</div>
+                        <div class="fs-4 fw-bold text-dark"><c:out value="${analytics.activeListingsCount != null ? analytics.activeListingsCount : 0}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+            <div class="card border-0 shadow-sm bg-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-circle bg-warning-subtle text-warning p-3 me-3">
+                        <i class="bi bi-exclamation-triangle fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted small fw-semibold text-uppercase">Low Stock</div>
+                        <div class="fs-4 fw-bold text-warning"><c:out value="${analytics.lowStockCount != null ? analytics.lowStockCount : 0}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Product Listings Table -->
     <div class="card shadow-sm">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">

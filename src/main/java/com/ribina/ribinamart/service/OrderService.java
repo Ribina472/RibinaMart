@@ -153,4 +153,45 @@ public class OrderService {
             throw new RuntimeException("Database error updating order status", e);
         }
     }
+
+    public com.ribina.ribinamart.dto.SellerAnalyticsDTO getSellerAnalytics(Long sellerId) {
+        if (sellerId == null || sellerId <= 0) {
+            return new com.ribina.ribinamart.dto.SellerAnalyticsDTO();
+        }
+        try {
+            List<Order> orders = orderDAO.findBySellerId(sellerId);
+            BigDecimal totalRevenue = BigDecimal.ZERO;
+            long unitsSold = 0;
+            long validOrdersCount = 0;
+
+            for (Order o : orders) {
+                if (o.getStatus() != OrderStatus.CANCELLED) {
+                    validOrdersCount++;
+                    if (o.getItems() != null) {
+                        for (OrderItem item : o.getItems()) {
+                            BigDecimal itemTotal = item.getPriceAtPurchase().multiply(BigDecimal.valueOf(item.getQuantity()));
+                            totalRevenue = totalRevenue.add(itemTotal);
+                            unitsSold += item.getQuantity();
+                        }
+                    }
+                }
+            }
+
+            List<Product> products = productDAO.findBySellerId(sellerId);
+            long activeListings = 0;
+            long lowStock = 0;
+            for (Product p : products) {
+                if (p.getStatus() == ProductStatus.ACTIVE) {
+                    activeListings++;
+                }
+                if (p.getStockQuantity() <= 5) {
+                    lowStock++;
+                }
+            }
+
+            return new com.ribina.ribinamart.dto.SellerAnalyticsDTO(totalRevenue, validOrdersCount, unitsSold, activeListings, lowStock);
+        } catch (SQLException e) {
+            throw new RuntimeException("Database error calculating seller analytics", e);
+        }
+    }
 }

@@ -24,6 +24,7 @@ public class TestDBHelper {
     public static void clearTables() throws Exception {
         try (Connection conn = DBConnectionPool.getConnection();
              Statement stmt = conn.createStatement()) {
+            stmt.execute("DELETE FROM wishlist_items");
             stmt.execute("DELETE FROM reviews");
             stmt.execute("DELETE FROM order_items");
             stmt.execute("DELETE FROM orders");

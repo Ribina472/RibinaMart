@@ -89,11 +89,14 @@ public class AuthFilter implements Filter {
                 uri.startsWith("/js/") ||
                 uri.startsWith("/images/") ||
                 uri.startsWith("/api/v1/health") ||
+                uri.startsWith("/api/chat") ||
+                uri.startsWith("/api/v1/chat") ||
                 uri.startsWith("/error");
     }
 
     private boolean isBuyerRoute(String uri) {
         return uri.startsWith("/cart") ||
+                uri.startsWith("/wishlist") ||
                 uri.startsWith("/checkout") ||
                 uri.startsWith("/orders") ||
                 uri.startsWith("/reviews/add") ||
